@@ -647,15 +647,15 @@
             if (lead.status === 'todo') {
                 lead.status = 'in-progress';
                 lead.dateCompleted = null;
-                showToast('Lead marked as In Progress (Yellow)');
+                showToast('In Progress');
             } else if (lead.status === 'in-progress') {
                 lead.status = 'completed';
                 lead.dateCompleted = new Date().toISOString();
-                showToast('Lead marked as Completed (Green)');
+                showToast('Completed');
             } else {
                 lead.status = 'todo';
                 lead.dateCompleted = null;
-                showToast('Lead marked as To Do');
+                showToast('To Do');
             }
             saveToStorage();
             renderLeads();
