@@ -3,13 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eazii Mails - Leads tracker</title>
-<!-- Blue envelope favicon -->
-<!-- Emoji favicon (📧 Email icon) -->
+<title>Eazii Mails - Smart Lead Management</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📧</text></svg>">
-
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     * {
         margin: 0;
@@ -17,33 +13,342 @@
         box-sizing: border-box;
     }
 
+    :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --secondary: #8b5cf6;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --border: #e2e8f0;
+    }
+
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: #f8f9fa;
-        color: #1a1a1a;
-        height: 100vh;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+    }
+
+    /* Landing Page Styles */
+    .landing-page {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .landing-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: white;
+        font-size: 1.5em;
+        font-weight: 700;
+    }
+
+    .logo i {
+        font-size: 1.3em;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        font-size: 0.95em;
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .btn-outline:hover {
+        background: white;
+        color: var(--primary);
+    }
+
+    .btn-primary {
+        background: white;
+        color: var(--primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .hero-section {
+        text-align: center;
+        padding: 100px 20px;
+        color: white;
+    }
+
+    .hero-section h1 {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .hero-section p {
+        font-size: 1.3em;
+        margin-bottom: 40px;
+        opacity: 0.95;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-image {
+        max-width: 900px;
+        margin: 60px auto 0;
+        border-radius: 16px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         overflow: hidden;
+    }
+
+    .hero-image img {
+        width: 100%;
+        display: block;
+    }
+
+    .features-section {
+        padding: 80px 50px;
+        background: white;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .feature-card {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 1.8em;
+    }
+
+    .feature-card h3 {
+        font-size: 1.4em;
+        margin-bottom: 12px;
+        color: var(--dark);
+    }
+
+    .feature-card p {
+        color: var(--gray);
+        font-size: 1em;
+    }
+
+    /* Auth Pages */
+    .auth-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+    }
+
+    .auth-box {
+        background: white;
+        padding: 50px;
+        border-radius: 16px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        max-width: 450px;
+        width: 100%;
+    }
+
+    .auth-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .auth-header h2 {
+        font-size: 2em;
+        color: var(--dark);
+        margin-bottom: 10px;
+    }
+
+    .auth-header p {
+        color: var(--gray);
+    }
+
+    .auth-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4em;
+        color: white;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--dark);
+        font-weight: 600;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 1em;
+        transition: all 0.3s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .btn-block {
+        width: 100%;
+        padding: 14px;
+        margin-top: 10px;
+    }
+
+    .auth-footer {
+        text-align: center;
+        margin-top: 20px;
+        color: var(--gray);
+    }
+
+    .auth-footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Dashboard Styles */
+    .dashboard {
+        display: none;
+        min-height: 100vh;
+    }
+
+    .dashboard.active {
+        display: block;
+    }
+
+    .dashboard-nav {
+        background: white;
+        padding: 15px 30px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .dashboard-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--primary);
+        font-size: 1.3em;
+        font-weight: 700;
+    }
+
+    .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .btn-logout {
+        background: var(--danger);
+        color: white;
+    }
+
+    .btn-logout:hover {
+        background: #dc2626;
     }
 
     .main-container {
         display: grid;
         grid-template-columns: 1fr 350px;
-        height: 100vh;
+        height: calc(100vh - 70px);
         gap: 0;
     }
 
     .left-section {
         padding: 30px;
         overflow-y: auto;
-        background: #fff;
+        background: var(--light);
     }
 
     .right-section {
-        background: #f8f9fa;
-        border-left: 1px solid #e9ecef;
+        background: white;
+        border-left: 1px solid var(--border);
         display: flex;
         flex-direction: column;
-        height: 100vh;
+        height: calc(100vh - 70px);
     }
 
     .header {
@@ -53,65 +358,83 @@
     .header h1 {
         font-size: 2em;
         font-weight: 700;
-        color: #1a1a1a;
+        color: var(--dark);
         margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
     .header p {
-        color: #6c757d;
+        color: var(--gray);
         font-size: 1em;
     }
 
     .controls {
-        background: #f8f9fa;
+        background: white;
         padding: 20px;
         border-radius: 12px;
         margin-bottom: 24px;
-        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    .file-input-wrapper {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 16px;
-    }
-
-    .file-input-label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px;
-        background: #4F46E5;
-        color: #fff;
-        border-radius: 8px;
+    .file-upload-area {
+        border: 2px dashed var(--border);
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 20px;
         cursor: pointer;
-        font-weight: 600;
-        transition: all 0.2s;
+        transition: all 0.3s;
     }
 
-    .file-input-label:hover {
-        background: #4338CA;
+    .file-upload-area:hover {
+        border-color: var(--primary);
+        background: rgba(99, 102, 241, 0.05);
     }
 
-    .file-input-wrapper input[type=file] {
-        position: absolute;
-        left: -9999px;
+    .file-upload-area i {
+        font-size: 3em;
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+
+    .uploaded-files {
+        margin-top: 15px;
+    }
+
+    .file-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--light);
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 5px;
+        font-size: 0.9em;
+    }
+
+    .file-tag i {
+        color: var(--success);
+    }
+
+    .file-tag .remove-file {
+        cursor: pointer;
+        color: var(--danger);
+        margin-left: 8px;
     }
 
     .search-filter-row {
         display: grid;
-        grid-template-columns: 1fr auto auto auto auto auto;
+        grid-template-columns: 1fr auto auto auto auto;
         gap: 10px;
     }
 
     .search-box {
-        padding: 10px 14px;
-        border: 2px solid #e9ecef;
-        background: #fff;
-        color: #1a1a1a;
+        padding: 12px 16px;
+        border: 2px solid var(--border);
+        background: white;
+        color: var(--dark);
         border-radius: 8px;
         font-size: 0.95em;
         transition: all 0.2s;
@@ -119,31 +442,182 @@
 
     .search-box:focus {
         outline: none;
-        border-color: #4F46E5;
+        border-color: var(--primary);
     }
 
     .filter-btn {
-        padding: 10px 16px;
-        border: 2px solid #e9ecef;
-        background: #fff;
-        color: #6c757d;
+        padding: 12px 20px;
+        border: 2px solid var(--border);
+        background: white;
+        color: var(--gray);
         border-radius: 8px;
         cursor: pointer;
         font-weight: 600;
         transition: all 0.2s;
         white-space: nowrap;
-        font-size: 0.9em;
     }
 
     .filter-btn:hover {
-        border-color: #4F46E5;
-        color: #4F46E5;
+        border-color: var(--primary);
+        color: var(--primary);
     }
 
     .filter-btn.active {
-        background: #4F46E5;
-        color: #fff;
-        border-color: #4F46E5;
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+
+    .leads-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .lead-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: all 0.3s;
+        border: 2px solid transparent;
+    }
+
+    .lead-card:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    .lead-card.in-progress {
+        background: #fffbeb;
+        border-color: var(--warning);
+    }
+
+    .lead-card.completed {
+        background: #f0fdf4;
+        border-color: var(--success);
+    }
+
+    .lead-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .checkbox {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        border: 2px solid var(--border);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 2px;
+    }
+
+    .checkbox:hover {
+        border-color: var(--primary);
+        transform: scale(1.1);
+    }
+
+    .checkbox.in-progress {
+        background: var(--warning);
+        border-color: var(--warning);
+    }
+
+    .checkbox.checked {
+        background: var(--success);
+        border-color: var(--success);
+    }
+
+    .checkbox i {
+        color: white;
+        font-size: 0.8em;
+    }
+
+    .lead-info {
+        flex: 1;
+    }
+
+    .lead-name {
+        font-size: 1.1em;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .copy-btn {
+        padding: 4px 10px;
+        background: var(--light);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.75em;
+        color: var(--gray);
+        transition: all 0.2s;
+        font-weight: 600;
+    }
+
+    .copy-btn:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .lead-detail {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--gray);
+        font-size: 0.9em;
+        margin-bottom: 8px;
+    }
+
+    .lead-detail i {
+        width: 20px;
+        color: var(--primary);
+    }
+
+    .stats-section {
+        padding: 25px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .stats-section h2 {
+        font-size: 1.3em;
+        margin-bottom: 20px;
+        color: var(--dark);
+    }
+
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .stat-item:last-child {
+        border-bottom: none;
+    }
+
+    .stat-label {
+        color: var(--gray);
+        font-size: 0.95em;
+        font-weight: 500;
+    }
+
+    .stat-value {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: var(--dark);
     }
 
     .leads-container {
@@ -152,351 +626,358 @@
         padding: 20px;
     }
 
-    .leads-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 16px;
-    }
-
-    .lead-card {
-        background: #fff;
-        padding: 18px;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        transition: all 0.2s;
-        border: 2px solid transparent;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .lead-card:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        border-color: #4F46E5;
-    }
-
-    .lead-card.in-progress {
-        background: #fffbeb;
-        border-color: #F59E0B;
-    }
-
-    .lead-card.completed {
-        background: #f0fdf4;
-        border-color: #10B981;
-    }
-
-    .lead-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .checkbox {
-        width: 22px;
-        height: 22px;
-        min-width: 22px;
-        border: 2px solid #d1d5db;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-top: 2px;
-    }
-
-    .checkbox:hover {
-        border-color: #4F46E5;
-    }
-
-    .checkbox.in-progress {
-        background: #F59E0B;
-        border-color: #F59E0B;
-    }
-
-    .checkbox.checked {
-        background: #10B981;
-        border-color: #10B981;
-    }
-
-    .checkbox svg {
-        width: 14px;
-        height: 14px;
-        stroke: #fff;
-        stroke-width: 3;
-    }
-
-    .lead-info {
-        flex: 1;
-    }
-
-    .lead-name {
-        font-size: 1em;
-        font-weight: 600;
-        color: #1a1a1a;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        word-break: break-word;
-    }
-
-    .name-text {
-        flex: 1;
-    }
-
-    .copy-btn {
-        padding: 3px 8px;
-        background: #e9ecef;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.7em;
-        color: #6c757d;
-        transition: all 0.2s;
-        font-weight: 600;
-        white-space: nowrap;
-    }
-
-    .copy-btn:hover {
-        background: #4F46E5;
-        color: #fff;
-    }
-
-    .lead-detail {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        color: #6c757d;
-        font-size: 0.85em;
-        margin-bottom: 6px;
-        word-break: break-word;
-        line-height: 1.4;
-    }
-
-    .detail-content {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex: 1;
-    }
-
-    .detail-text {
-        flex: 1;
-    }
-
-    .notes-section {
-        display: none;
-    }
-
-    .notes-input {
-        display: none;
-    }
-
-    .stats-section {
-        padding: 20px;
-        border-bottom: 1px solid #e9ecef;
-    }
-
-    .stats-section h2 {
-        font-size: 1.2em;
-        margin-bottom: 16px;
-        color: #1a1a1a;
-    }
-
-    .stat-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 0;
-        border-bottom: 1px solid #e9ecef;
-    }
-
-    .stat-item:last-child {
-        border-bottom: none;
-    }
-
-    .stat-label {
-        color: #6c757d;
-        font-size: 0.9em;
-        font-weight: 500;
-    }
-
-    .stat-value {
-        font-size: 1.4em;
-        font-weight: 700;
-        color: #1a1a1a;
-    }
-
     .export-section {
         padding: 20px;
-        border-top: 1px solid #e9ecef;
+        border-top: 1px solid var(--border);
     }
 
     .export-btn {
         width: 100%;
         padding: 14px;
-        background: #10B981;
-        color: #fff;
+        background: var(--success);
+        color: white;
         border: none;
         border-radius: 8px;
         cursor: pointer;
         font-weight: 600;
-        transition: all 0.2s;
+        transition: all 0.3s;
         font-size: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
     }
 
     .export-btn:hover {
         background: #059669;
+        transform: translateY(-2px);
     }
 
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: #6c757d;
+        color: var(--gray);
+    }
+
+    .empty-state i {
+        font-size: 4em;
+        color: var(--border);
+        margin-bottom: 20px;
     }
 
     .empty-state h3 {
         margin-bottom: 8px;
-        color: #1a1a1a;
-    }
-
-    @media (max-width: 1024px) {
-        .main-container {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto 1fr;
-        }
-
-        .right-section {
-            border-left: none;
-            border-top: 1px solid #e9ecef;
-            height: auto;
-            max-height: 300px;
-        }
-
-        .left-section {
-            height: auto;
-        }
-
-        .leads-grid {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        }
-    }
-
-    @media (max-width: 768px) {
-        .left-section {
-            padding: 20px;
-        }
-
-        .header h1 {
-            font-size: 1.6em;
-        }
-
-        .search-filter-row {
-            grid-template-columns: 1fr;
-        }
-
-        .stat-value {
-            font-size: 1.2em;
-        }
-
-        .leads-grid {
-            grid-template-columns: 1fr;
-        }
+        color: var(--dark);
     }
 
     .toast {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background: #1a1a1a;
-        color: #fff;
-        padding: 12px 20px;
+        background: var(--dark);
+        color: white;
+        padding: 14px 24px;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         opacity: 0;
         transform: translateY(20px);
         transition: all 0.3s;
         z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .toast.show {
         opacity: 1;
         transform: translateY(0);
     }
+
+    @media (max-width: 1024px) {
+        .main-container {
+            grid-template-columns: 1fr;
+        }
+
+        .right-section {
+            border-left: none;
+            border-top: 1px solid var(--border);
+            height: auto;
+            max-height: 400px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .landing-nav {
+            padding: 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;
+        }
+
+        .features-section {
+            padding: 60px 20px;
+        }
+
+        .search-filter-row {
+            grid-template-columns: 1fr;
+        }
+
+        .leads-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .hidden {
+        display: none !important;
+    }
 </style>
 </head>
 <body>
-<div class="main-container">
-    <div class="left-section">
-        <div class="header">
-            <h1>Lead Tracker</h1>
-            <p>Manage and track your leads efficiently</p>
+
+<!-- Landing Page -->
+<div id="landingPage" class="landing-page">
+    <nav class="landing-nav">
+        <div class="logo">
+            <i class="fas fa-envelope"></i>
+            <span>Eazii Mails</span>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn btn-outline" onclick="showLogin()">Sign In</button>
+            <button class="btn btn-primary" onclick="showSignup()">Get Started</button>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <h1>Smart Lead Management<br>Made Simple</h1>
+        <p>Track, manage, and convert your leads with powerful tools designed for modern teams</p>
+        <button class="btn btn-primary" style="font-size: 1.1em; padding: 16px 40px;" onclick="showSignup()">
+            Start Free Today <i class="fas fa-arrow-right"></i>
+        </button>
+        
+        <div class="hero-image">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect fill='%23667eea' width='800' height='500'/%3E%3Ctext x='400' y='250' font-size='80' fill='white' text-anchor='middle' font-family='Arial'%3E%F0%9F%93%8A Dashboard Preview%3C/text%3E%3C/svg%3E" alt="Dashboard Preview">
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h3>Multi-File Upload</h3>
+                <p>Upload multiple CSV and Excel files seamlessly. Smart duplicate detection keeps your data clean.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sync"></i>
+                </div>
+                <h3>Progress Tracking</h3>
+                <p>Track your lead progress with intelligent status management. Never lose your work with auto-save.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Real-time Analytics</h3>
+                <p>Get instant insights into your lead pipeline with comprehensive statistics and reporting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-filter"></i>
+                </div>
+                <h3>Smart Filtering</h3>
+                <p>Filter and search your leads effortlessly. Find exactly what you need in seconds.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Easy Export</h3>
+                <p>Export your data anytime with complete progress history. Your data, your control.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Storage</h3>
+                <p>Your data is safely stored and synced. Work from anywhere with confidence.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Login Page -->
+<div id="loginPage" class="auth-container hidden">
+    <div class="auth-box">
+        <div class="auth-header">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px; color: var(--primary);">
+                <i class="fas fa-envelope"></i>
+                <span>Eazii Mails</span>
+            </div>
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue to your dashboard</p>
         </div>
 
-        <div class="controls">
-            <div class="file-input-wrapper">
-                <label class="file-input-label" for="csvFile">
-                    <span>📁</span>
-                    <span>Upload CSV or Excel File</span>
-                </label>
-                <input type="file" id="csvFile" accept=".csv,.xlsx,.xls">
-            </div>
-
-            <div class="search-filter-row">
-                <input type="text" class="search-box" id="searchBox" placeholder="Search leads...">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="todo">To Do</button>
-                <button class="filter-btn" data-filter="progress">In Progress</button>
-                <button class="filter-btn" data-filter="done">Done</button>
-            </div>
+        <div class="auth-image">
+            <i class="fas fa-user-lock"></i>
         </div>
 
-        <div id="leadsList" class="leads-grid">
-            <div class="empty-state">
-                <h3>No Leads Yet</h3>
-                <p>Upload a CSV or Excel file to get started</p>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-input" id="loginEmail" placeholder="you@example.com" required>
             </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
         </div>
     </div>
+</div>
 
-    <div class="right-section">
-        <div class="stats-section">
-            <h2>Progress</h2>
-            <div class="stat-item">
-                <span class="stat-label">Total Leads</span>
-                <span class="stat-value" id="totalLeads">0</span>
+<!-- Signup Page -->
+<div id="signupPage" class="auth-container hidden">
+    <div class="auth-box">
+        <div class="auth-header">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px; color: var(--primary);">
+                <i class="fas fa-envelope"></i>
+                <span>Eazii Mails</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">In Progress</span>
-                <span class="stat-value" id="inProgressLeads" style="color: #F59E0B;">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Completed</span>
-                <span class="stat-value" id="completedLeads" style="color: #10B981;">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">To Go</span>
-                <span class="stat-value" id="toGoLeads">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Progress</span>
-                <span class="stat-value" id="progressPercent">0%</span>
-            </div>
+            <h2>Create Account</h2>
+            <p>Start managing your leads today</p>
         </div>
 
-        <div class="leads-container">
-            <h2 style="font-size: 1.2em; margin-bottom: 16px; color: #1a1a1a;">Quick View</h2>
-            <div id="quickLeadsList">
+        <div class="auth-image">
+            <i class="fas fa-user-plus"></i>
+        </div>
+
+        <form onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" class="form-input" id="signupName" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-input" id="signupEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-input" id="signupPassword" placeholder="Create a password" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-user-check"></i> Create Account
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="dashboard">
+    <nav class="dashboard-nav">
+        <div class="dashboard-logo">
+            <i class="fas fa-envelope"></i>
+            <span>Eazii Mails</span>
+        </div>
+        <div class="user-menu">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span id="userName">User</span>
+            </div>
+            <button class="btn btn-logout" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="left-section">
+            <div class="header">
+                <h1>
+                    <i class="fas fa-users-cog"></i>
+                    Lead Management Hub
+                </h1>
+                <p>Organize, track, and convert your leads efficiently</p>
+            </div>
+
+            <div class="controls">
+                <div class="file-upload-area" onclick="document.getElementById('csvFile').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Upload CSV or Excel Files</h3>
+                    <p>Support for multiple files with automatic duplicate detection</p>
+                    <input type="file" id="csvFile" accept=".csv,.xlsx,.xls" multiple style="display: none;">
+                </div>
+                <div id="uploadedFiles" class="uploaded-files"></div>
+
+                <div class="search-filter-row">
+                    <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search leads...">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="todo">To Do</button>
+                    <button class="filter-btn" data-filter="progress">In Progress</button>
+                    <button class="filter-btn" data-filter="done">Done</button>
+                </div>
+            </div>
+
+            <div id="leadsList" class="leads-grid">
                 <div class="empty-state">
-                    <p>Leads will appear here</p>
+                    <i class="fas fa-inbox"></i>
+                    <h3>No Leads Yet</h3>
+                    <p>Upload a CSV or Excel file to get started</p>
                 </div>
             </div>
         </div>
 
-        <div class="export-section">
-            <button class="export-btn" id="exportBtn">💾 Export CSV</button>
+        <div class="right-section">
+            <div class="stats-section">
+                <h2>📊 Progress Overview</h2>
+                <div class="stat-item">
+                    <span class="stat-label">Total Leads</span>
+                    <span class="stat-value" id="totalLeads">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">In Progress</span>
+                    <span class="stat-value" id="inProgressLeads" style="color: var(--warning);">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Completed</span>
+                    <span class="stat-value" id="completedLeads" style="color: var(--success);">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">To Go</span>
+                    <span class="stat-value" id="toGoLeads">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Progress</span>
+                    <span class="stat-value" id="progressPercent">0%</span>
+                </div>
+            </div>
+
+            <div class="leads-container">
+                <h2 style="font-size: 1.2em; margin-bottom: 16px; color: var(--dark);">Quick View</h2>
+                <div id="quickLeadsList">
+                    <div class="empty-state">
+                        <p>Leads will appear here</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="export-section">
+                <button class="export-btn" id="exportBtn" onclick="exportToCSV()">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -506,11 +987,181 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <script>
+    let currentUser = null;
     let leads = [];
+    let uploadedFiles = [];
     let currentFilter = 'all';
     let searchTerm = '';
 
-    loadFromStorage();
+    // Check if user is logged in on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        checkAuth();
+    });
+
+    // Replace the checkAuth function:
+async function checkAuth() {
+    const userData = localStorage.getItem('current-user');
+    if (userData) {
+        currentUser = JSON.parse(userData);
+        showDashboard();
+        await loadUserData();
+    } else {
+        showLanding();
+    }
+}
+
+    function showLanding() {
+        document.getElementById('landingPage').classList.remove('hidden');
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('signupPage').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('active');
+    }
+
+    function showLogin() {
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('loginPage').classList.remove('hidden');
+        document.getElementById('signupPage').classList.add('hidden');
+    }
+
+    function showSignup() {
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('signupPage').classList.remove('hidden');
+    }
+
+    function showDashboard() {
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('signupPage').classList.add('hidden');
+        document.getElementById('dashboard').classList.add('active');
+        
+        if (currentUser) {
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+        }
+    }
+
+    async function handleSignup(e) {
+    e.preventDefault();
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    try {
+        // Check if user already exists
+        const userKey = `user-${email}`;
+        const existingUser = localStorage.getItem(userKey);
+        
+        if (existingUser) {
+            showToast('Account already exists. Please sign in.', 'fas fa-info-circle');
+            return;
+        }
+
+        // Create user
+        const user = { name, email, password, createdAt: new Date().toISOString() };
+        localStorage.setItem(userKey, JSON.stringify(user));
+        
+        // Set as current user
+        currentUser = user;
+        localStorage.setItem('current-user', JSON.stringify(user));
+        
+        showToast('Account created successfully!', 'fas fa-check-circle');
+        showDashboard();
+    } catch (error) {
+        showToast('Error creating account. Please try again.', 'fas fa-exclamation-circle');
+        console.error('Signup error:', error);
+    }
+}
+
+async function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        const userKey = `user-${email}`;
+        const existingUser = localStorage.getItem(userKey);
+        
+        if (!existingUser) {
+            showToast('Account not found. Please sign up.', 'fas fa-info-circle');
+            return;
+        }
+
+        const user = JSON.parse(existingUser);
+        
+        if (user.password !== password) {
+            showToast('Incorrect password. Please try again.', 'fas fa-exclamation-circle');
+            return;
+        }
+
+        currentUser = user;
+        localStorage.setItem('current-user', JSON.stringify(user));
+        
+        showToast('Welcome back!', 'fas fa-check-circle');
+        showDashboard();
+        await loadUserData();
+    } catch (error) {
+        showToast('Login error. Please try again.', 'fas fa-exclamation-circle');
+        console.error('Login error:', error);
+    }
+}
+
+async function handleLogout() {
+    localStorage.removeItem('current-user');
+    currentUser = null;
+    leads = [];
+    uploadedFiles = [];
+    showToast('Logged out successfully', 'fas fa-check-circle');
+    showLanding();
+}
+
+async function loadUserData() {
+    if (!currentUser) return;
+
+    // Load leads
+    const leadsKey = `leads-${currentUser.email}`;
+    const leadsData = localStorage.getItem(leadsKey);
+    if (leadsData) {
+        leads = JSON.parse(leadsData);
+    }
+
+    // Load uploaded files list
+    const filesKey = `files-${currentUser.email}`;
+    const filesData = localStorage.getItem(filesKey);
+    if (filesData) {
+        uploadedFiles = JSON.parse(filesData);
+        renderUploadedFiles();
+    }
+
+    renderLeads();
+}
+
+async function saveUserData() {
+    if (!currentUser) return;
+
+    const leadsKey = `leads-${currentUser.email}`;
+    localStorage.setItem(leadsKey, JSON.stringify(leads));
+
+    const filesKey = `files-${currentUser.email}`;
+    localStorage.setItem(filesKey, JSON.stringify(uploadedFiles));
+}
+
+    function showToast(message, icon = 'fas fa-check-circle') {
+        const toast = document.getElementById('toast');
+        toast.innerHTML = `<i class="${icon}"></i> ${message}`;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    function copyToClipboard(text, type) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`${type} copied!`);
+        }).catch(() => {
+            showToast('Failed to copy', 'fas fa-exclamation-circle');
+        });
+    }
 
     document.getElementById('csvFile').addEventListener('change', handleFileUpload);
 
@@ -528,145 +1179,216 @@
         });
     });
 
-    document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+    async function handleFileUpload(e) {
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
 
-    async function loadFromStorage() {
-        try {
-            const result = await window.storage.get('leads-data');
-            if (result && result.value) {
-                leads = JSON.parse(result.value);
-                renderLeads();
+        for (const file of files) {
+            const extension = file.name.split('.').pop().toLowerCase();
+            
+            // Generate file hash for duplicate detection
+            const fileHash = await generateFileHash(file);
+            
+            // Check if file was already uploaded
+            const existingFile = uploadedFiles.find(f => f.hash === fileHash);
+            if (existingFile) {
+                showToast(`File "${file.name}" already uploaded`, 'fas fa-info-circle');
+                continue;
             }
-        } catch (error) {
-            console.log('No saved data found');
+
+            if (extension === 'csv') {
+                Papa.parse(file, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: (results) => {
+                        processData(results.data, file.name, fileHash);
+                    },
+                    error: (error) => {
+                        showToast('Error reading CSV: ' + error.message, 'fas fa-exclamation-circle');
+                    }
+                });
+            } else if (extension === 'xlsx' || extension === 'xls') {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+                    processData(jsonData, file.name, fileHash);
+                };
+                reader.readAsArrayBuffer(file);
+            }
         }
+        
+        e.target.value = '';
     }
 
-    async function saveToStorage() {
-        try {
-            await window.storage.set('leads-data', JSON.stringify(leads));
-        } catch (error) {
-            console.error('Error saving data:', error);
+    async function generateFileHash(file) {
+        const text = await file.text();
+        let hash = 0;
+        for (let i = 0; i < text.length; i++) {
+            const char = text.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash;
         }
+        return hash.toString();
     }
 
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2000);
-    }
+    function processData(data, fileName, fileHash) {
+        const newLeads = data
+            .map((row, index) => {
+                const firstName = row['First Name'] || row['first name'] || row['FIRST NAME'] || row['firstName'] || '';
+                const lastName = row['Last Name'] || row['last name'] || row['LAST NAME'] || row['lastName'] || '';
+                const fullName = `${firstName} ${lastName}`.trim() || row.Name || row.name || row.NAME || '';
+                const email = row.Email || row.email || row.EMAIL || '';
+                const company = row['Company Name'] || row['Company name'] || row['company name'] || 
+                              row['COMPANY NAME'] || row.Company || row.company || row.COMPANY || '';
 
-    function copyToClipboard(text, type) {
-        navigator.clipboard.writeText(text).then(() => {
-            showToast(`${type} copied!`);
-        }).catch(() => {
-            showToast('Failed to copy');
+                return {
+                    name: fullName,
+                    email: email,
+                    company: company,
+                    status: 'todo',
+                    dateCompleted: null,
+                    fileName: fileName
+                };
+            })
+            .filter(lead => lead.name || lead.email || lead.company);
+
+        // Check for duplicates across all leads (email-based)
+        let duplicatesRemoved = 0;
+        const existingEmails = new Set(leads.filter(l => l.email).map(l => l.email.toLowerCase()));
+        
+        const uniqueNewLeads = newLeads.filter(lead => {
+            if (lead.email) {
+                const emailLower = lead.email.toLowerCase();
+                if (existingEmails.has(emailLower)) {
+                    duplicatesRemoved++;
+                    return false;
+                }
+                existingEmails.add(emailLower);
+            }
+            return true;
         });
-    }
 
-    function handleFileUpload(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const extension = file.name.split('.').pop().toLowerCase();
-
-        if (extension === 'csv') {
-            Papa.parse(file, {
-                header: true,
-                skipEmptyLines: true,
-                complete: (results) => {
-                    processData(results.data);
-                },
-                error: (error) => {
-                    alert('Error reading CSV: ' + error.message);
+        // Check if this is a re-upload (same file hash)
+        const existingFileData = uploadedFiles.find(f => f.hash === fileHash);
+        if (existingFileData) {
+            // File was previously uploaded, restore progress
+            uniqueNewLeads.forEach(newLead => {
+                const savedProgress = existingFileData.leadsProgress?.find(
+                    p => p.email && newLead.email && p.email.toLowerCase() === newLead.email.toLowerCase()
+                );
+                if (savedProgress) {
+                    newLead.status = savedProgress.status;
+                    newLead.dateCompleted = savedProgress.dateCompleted;
                 }
             });
-        } else if (extension === 'xlsx' || extension === 'xls') {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: 'array' });
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-                processData(jsonData);
-            };
-            reader.readAsArrayBuffer(file);
+            showToast(`Progress restored for "${fileName}"`, 'fas fa-history');
         }
+
+        // Add new leads with unique IDs
+        const startId = leads.length;
+        uniqueNewLeads.forEach((lead, index) => {
+            leads.push({
+                ...lead,
+                id: startId + index
+            });
+        });
+
+        // Track uploaded file
+        uploadedFiles.push({
+            name: fileName,
+            hash: fileHash,
+            uploadedAt: new Date().toISOString(),
+            leadCount: uniqueNewLeads.length
+        });
+
+        saveUserData();
+        renderLeads();
+        renderUploadedFiles();
+        
+        let message = `${uniqueNewLeads.length} leads imported from "${fileName}"`;
+        if (duplicatesRemoved > 0) {
+            message += ` (${duplicatesRemoved} duplicates removed)`;
+        }
+        showToast(message, 'fas fa-file-upload');
     }
 
-    function processData(data) {
-      leads = data
-          .map((row, index) => {
-              // Find the correct column names by checking common variations
-              const firstName = row['First Name'] || row['first name'] || row['FIRST NAME'] || row['firstName'] || '';
-              const lastName = row['Last Name'] || row['last name'] || row['LAST NAME'] || row['lastName'] || '';
-              const fullName = `${firstName} ${lastName}`.trim() || row.Name || row.name || row.NAME || '';
-              const email = row.Email || row.email || row.EMAIL || '';
-              
-              // Look for company name with various possible column names
-              const company = row['Company Name'] || row['Company name'] || row['company name'] || 
-                            row['COMPANY NAME'] || row.Company || row.company || row.COMPANY || '';
+    function renderUploadedFiles() {
+        const container = document.getElementById('uploadedFiles');
+        if (uploadedFiles.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
 
-              return {
-                  id: index,
-                  name: fullName,
-                  email: email,
-                  company: company,
-                  status: 'todo', // todo, in-progress, completed
-                  dateCompleted: null
-              };
-          })
-          .filter(lead => {
-              // Only remove rows that have NO data at all
-              const hasAnyData = lead.name || lead.email || lead.company;
-              return hasAnyData;
-          })
-          .map((lead, index) => ({
-              ...lead,
-              id: index // Re-index after filtering
-          }));
+        const filesHTML = uploadedFiles.map((file, index) => `
+            <span class="file-tag">
+                <i class="fas fa-file-excel"></i>
+                ${file.name}
+                <span class="remove-file" onclick="removeFile(${index})">
+                    <i class="fas fa-times"></i>
+                </span>
+            </span>
+        `).join('');
 
-      saveToStorage();
-      renderLeads();
-      
-      const filteredCount = data.length - leads.length;
-      if (filteredCount > 0) {
-          showToast(`${leads.length} leads imported! (${filteredCount} empty rows removed)`);
-      } else {
-          showToast(`${leads.length} leads imported successfully!`);
-      }
-  }
+        container.innerHTML = filesHTML;
+    }
+
+    function removeFile(index) {
+        const file = uploadedFiles[index];
+        
+        // Remove all leads from this file
+        leads = leads.filter(lead => lead.fileName !== file.name);
+        
+        // Remove file from list
+        uploadedFiles.splice(index, 1);
+        
+        saveUserData();
+        renderLeads();
+        renderUploadedFiles();
+        showToast(`File "${file.name}" removed`, 'fas fa-trash');
+    }
 
     function toggleLead(id) {
         const lead = leads.find(l => l.id === id);
         if (lead) {
-            // Cycle through states: todo -> in-progress -> completed -> todo
             if (lead.status === 'todo') {
                 lead.status = 'in-progress';
                 lead.dateCompleted = null;
-                showToast('In Progress');
+                showToast('In Progress', 'fas fa-clock');
             } else if (lead.status === 'in-progress') {
                 lead.status = 'completed';
                 lead.dateCompleted = new Date().toISOString();
-                showToast('Completed');
+                showToast('Completed', 'fas fa-check-circle');
             } else {
                 lead.status = 'todo';
                 lead.dateCompleted = null;
-                showToast('To Do');
+                showToast('To Do', 'fas fa-list');
             }
-            saveToStorage();
+            
+            // Update file progress tracking
+            const file = uploadedFiles.find(f => f.name === lead.fileName);
+            if (file) {
+                if (!file.leadsProgress) file.leadsProgress = [];
+                const progressIndex = file.leadsProgress.findIndex(p => p.email === lead.email);
+                if (progressIndex >= 0) {
+                    file.leadsProgress[progressIndex] = {
+                        email: lead.email,
+                        status: lead.status,
+                        dateCompleted: lead.dateCompleted
+                    };
+                } else {
+                    file.leadsProgress.push({
+                        email: lead.email,
+                        status: lead.status,
+                        dateCompleted: lead.dateCompleted
+                    });
+                }
+            }
+            
+            saveUserData();
             renderLeads();
-        }
-    }
-
-    function updateNotes(id, notes) {
-        const lead = leads.find(l => l.id === id);
-        if (lead) {
-            lead.notes = notes;
-            saveToStorage();
         }
     }
 
@@ -703,8 +1425,8 @@
 
         if (filteredLeads.length === 0) {
             const emptyMessage = leads.length === 0 
-                ? '<div class="empty-state"><h3>No Leads Yet</h3><p>Upload a CSV or Excel file to get started</p></div>'
-                : '<div class="empty-state"><h3>No Matches Found</h3><p>Try adjusting your search or filter</p></div>';
+                ? '<div class="empty-state"><i class="fas fa-inbox"></i><h3>No Leads Yet</h3><p>Upload a CSV or Excel file to get started</p></div>'
+                : '<div class="empty-state"><i class="fas fa-search"></i><h3>No Matches Found</h3><p>Try adjusting your search or filter</p></div>';
             
             mainContainer.innerHTML = emptyMessage;
             quickContainer.innerHTML = '<div class="empty-state"><p>No leads to display</p></div>';
@@ -719,11 +1441,11 @@
             if (lead.status === 'in-progress') {
                 statusClass = 'in-progress';
                 checkboxClass = 'in-progress';
-                checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+                checkIcon = '<i class="fas fa-minus"></i>';
             } else if (lead.status === 'completed') {
                 statusClass = 'completed';
                 checkboxClass = 'checked';
-                checkIcon = '<svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                checkIcon = '<i class="fas fa-check"></i>';
             }
             
             return `
@@ -734,21 +1456,17 @@
                     </div>
                     <div class="lead-info">
                         <div class="lead-name">
-                            <span class="name-text">${lead.name || 'N/A'}</span>
-                            ${lead.name ? `<button class="copy-btn" onclick="copyToClipboard('${lead.name}', 'Name')">Copy</button>` : ''}
+                            <span>${lead.name || 'N/A'}</span>
+                            ${lead.name ? `<button class="copy-btn" onclick="copyToClipboard('${lead.name}', 'Name')"><i class="fas fa-copy"></i></button>` : ''}
                         </div>
                         <div class="lead-detail">
-                            <span>🏢</span>
-                            <div class="detail-content">
-                                <span class="detail-text">${lead.company || 'N/A'}</span>
-                            </div>
+                            <i class="fas fa-building"></i>
+                            <span>${lead.company || 'N/A'}</span>
                         </div>
                         <div class="lead-detail">
-                            <span>✉️</span>
-                            <div class="detail-content">
-                                <span class="detail-text">${lead.email || 'N/A'}</span>
-                                ${lead.email ? `<button class="copy-btn" onclick="copyToClipboard('${lead.email}', 'Email')">Copy</button>` : ''}
-                            </div>
+                            <i class="fas fa-envelope"></i>
+                            <span style="flex: 1;">${lead.email || 'N/A'}</span>
+                            ${lead.email ? `<button class="copy-btn" onclick="copyToClipboard('${lead.email}', 'Email')"><i class="fas fa-copy"></i></button>` : ''}
                         </div>
                     </div>
                 </div>
@@ -764,10 +1482,10 @@
             
             if (lead.status === 'in-progress') {
                 checkboxClass = 'in-progress';
-                checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+                checkIcon = '<i class="fas fa-minus"></i>';
             } else if (lead.status === 'completed') {
                 checkboxClass = 'checked';
-                checkIcon = '<svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                checkIcon = '<i class="fas fa-check"></i>';
             }
             
             return `
@@ -778,7 +1496,7 @@
                     </div>
                     <div style="flex: 1; overflow: hidden;">
                         <div style="font-weight: 600; font-size: 0.95em; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lead.name || 'N/A'}</div>
-                        <div style="font-size: 0.8em; color: #6c757d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lead.email || 'N/A'}</div>
+                        <div style="font-size: 0.8em; color: var(--gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lead.email || 'N/A'}</div>
                     </div>
                 </div>
             </div>
@@ -790,7 +1508,7 @@
 
     function exportToCSV() {
         if (leads.length === 0) {
-            showToast('No leads to export!');
+            showToast('No leads to export!', 'fas fa-exclamation-circle');
             return;
         }
 
@@ -799,7 +1517,8 @@
             Email: lead.email,
             Company: lead.company,
             Status: lead.status === 'completed' ? 'Completed' : lead.status === 'in-progress' ? 'In Progress' : 'To Do',
-            'Date Completed': lead.dateCompleted ? new Date(lead.dateCompleted).toLocaleDateString() : ''
+            'Date Completed': lead.dateCompleted ? new Date(lead.dateCompleted).toLocaleDateString() : '',
+            'Source File': lead.fileName
         }));
 
         const csv = Papa.unparse(csvData);
@@ -807,10 +1526,10 @@
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `leads_export_${new Date().toISOString().split('T')[0]}.csv`;
+        a.download = `eazii_leads_export_${new Date().toISOString().split('T')[0]}.csv`;
         a.click();
         window.URL.revokeObjectURL(url);
-        showToast('CSV exported successfully!');
+        showToast('CSV exported successfully!', 'fas fa-download');
     }
 </script>
 </body>
